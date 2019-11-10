@@ -10,6 +10,12 @@ target/
 # Log file
 *.log
 
+# Lock files
+*.lck
+
+# ViM swap files
+*.sw[op]
+
 # BlueJ files
 *.ctxt
 
