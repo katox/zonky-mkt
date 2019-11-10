@@ -141,7 +141,7 @@ public class Processor implements Runnable {
     @Override
     public void run() {
         try {
-            while (true) {
+            while (!Thread.interrupted()) {
                 PageRequest pageRequest = requestQueue.take();
                 processRequest(pageRequest);
             }

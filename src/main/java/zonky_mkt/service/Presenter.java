@@ -62,7 +62,7 @@ public class Presenter implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        while (!Thread.interrupted()) {
             try {
                 Loan loan = loanQueue.take();
                 print(loan);
