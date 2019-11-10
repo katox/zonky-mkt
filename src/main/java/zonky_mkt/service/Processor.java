@@ -94,13 +94,16 @@ public class Processor implements Runnable {
                 requestQueue.clear();
                 log.warning("API rate limit exceeded. Waiting for the next run.");
             } else if (status >= 400 && status < 500) {
+                requestQueue.clear();
                 log.severe("Zonky Marketplace reports a bad request. Send me a bug report.");
             } else {
                 requestQueue.clear();
-                log.severe("Zonky Marketplace reports an internal server error. Send then a bug report.");
+                log.severe("Zonky Marketplace reports an internal server error. Send them a bug report.");
             }
 
             con.disconnect();
+        } catch (InterruptedException e) {
+            throw (e);
         } catch (IOException e) {
             requestQueue.clear();
             log.log(Level.SEVERE, "Error connecting to the Zonky Marketplace!", e);
