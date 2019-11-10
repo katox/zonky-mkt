@@ -9,6 +9,7 @@ target/
 
 # Log file
 *.log
+*.log.*
 
 # Lock files
 *.lck
