@@ -1,4 +1,6 @@
-package zonky_mkt;
+package zonky_mkt.service;
+
+import zonky_mkt.model.Loan;
 
 import java.io.BufferedWriter;
 import java.io.OutputStream;
@@ -22,7 +24,7 @@ public class Presenter implements Runnable {
         this.loanQueue = loanQueue;
     }
 
-    void printWrapped(String text) {
+    private void printWrapped(String text) {
         if (text != null) {
             StringTokenizer st = new StringTokenizer(text);
             int spaceLeft = MAX_WIDTH;

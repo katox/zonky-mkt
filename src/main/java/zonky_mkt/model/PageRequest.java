@@ -1,4 +1,4 @@
-package zonky_mkt;
+package zonky_mkt.model;
 
 import java.time.OffsetDateTime;
 

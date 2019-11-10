@@ -1,6 +1,12 @@
 package zonky_mkt;
 
 import com.google.common.util.concurrent.RateLimiter;
+import zonky_mkt.model.Loan;
+import zonky_mkt.model.PageRequest;
+import zonky_mkt.service.Presenter;
+import zonky_mkt.service.Processor;
+import zonky_mkt.service.Scheduler;
+import zonky_mkt.util.OneLineFormatter;
 
 import java.time.OffsetDateTime;
 import java.util.concurrent.BlockingQueue;

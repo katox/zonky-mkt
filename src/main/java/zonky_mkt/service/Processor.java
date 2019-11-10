@@ -1,7 +1,10 @@
-package zonky_mkt;
+package zonky_mkt.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.util.concurrent.RateLimiter;
+import zonky_mkt.util.UrlUtils;
+import zonky_mkt.model.Loan;
+import zonky_mkt.model.PageRequest;
 
 import java.io.IOException;
 import java.io.InputStream;

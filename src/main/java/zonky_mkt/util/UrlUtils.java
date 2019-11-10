@@ -1,4 +1,4 @@
-package zonky_mkt;
+package zonky_mkt.util;
 
 import java.net.MalformedURLException;
 import java.net.URL;

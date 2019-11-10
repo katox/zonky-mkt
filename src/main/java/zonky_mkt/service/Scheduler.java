@@ -1,4 +1,6 @@
-package zonky_mkt;
+package zonky_mkt.service;
+
+import zonky_mkt.model.PageRequest;
 
 import java.time.OffsetDateTime;
 import java.util.concurrent.BlockingQueue;

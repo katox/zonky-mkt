@@ -1,4 +1,4 @@
-package zonky_mkt;
+package zonky_mkt.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
