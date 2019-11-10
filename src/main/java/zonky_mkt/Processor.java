@@ -13,9 +13,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
+import java.util.logging.Logger;
 
 public class Processor implements Runnable {
-
+    private final static Logger log = Logger.getLogger(Processor.class.getName());
     private static final int CONNECT_TIMEOUT = 2000;
     private static final int READ_TIMEOUT = 2500;
 
@@ -66,6 +67,7 @@ public class Processor implements Runnable {
     }
 
     private void processPage(OffsetDateTime lastTs, Integer pageNo) throws InterruptedException {
+        log.fine("Processing pageNo " + pageNo + " (since " + lastTs + ")");
         try {
             HttpURLConnection con = (HttpURLConnection) getUrl(lastTs).openConnection();
             con.setRequestMethod("GET");
@@ -86,16 +88,17 @@ public class Processor implements Runnable {
                 queueRemaining(lastTs, pageNo, totalItems);
             } else if (status == 429) {
                 requestQueue.clear();
-                System.err.println("API rate limit exceeded. Waiting for the next run.");
+                log.warning("API rate limit exceeded. Waiting for the next run.");
             } else if (status >= 400 && status < 500) {
-                System.err.println("Zonky Marketplace reports a bad request. Send me a bug report.");
+                log.severe("Zonky Marketplace reports a bad request. Send me a bug report.");
             } else {
-                System.err.println("Zonky Marketplace reports an internal server error. Send then a bug report.");
+                requestQueue.clear();
+                log.severe("Zonky Marketplace reports an internal server error. Send then a bug report.");
             }
 
             con.disconnect();
         } catch (Exception e) {
-            System.err.println("Cant' process the response from Zonky Marketplace!");
+            log.severe("Cant' process the response from Zonky Marketplace!");
             e.printStackTrace();
         }
     }
@@ -121,6 +124,7 @@ public class Processor implements Runnable {
                 processRequest(pageRequest);
             }
         } catch (InterruptedException e) {
+            log.info("Interrupted. Aborting marketplace data processing.");
             Thread.currentThread().interrupt();
         }
     }

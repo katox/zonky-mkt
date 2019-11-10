@@ -7,9 +7,10 @@ import java.io.PrintWriter;
 import java.time.format.DateTimeFormatter;
 import java.util.StringTokenizer;
 import java.util.concurrent.BlockingQueue;
+import java.util.logging.Logger;
 
 public class Presenter implements Runnable {
-
+    private final static Logger log = Logger.getLogger(Presenter.class.getName());
     private static final int MAX_WIDTH = 80;
 
     private BlockingQueue<Loan> loanQueue;
@@ -49,7 +50,7 @@ public class Presenter implements Runnable {
             writer.println("=".repeat(MAX_WIDTH));
             writer.flush();
         } catch (Exception e) {
-            System.err.println("Error while printing a loan (" + e.getClass().getSimpleName() + "): " + e.getMessage());
+            log.severe("Error while printing a loan (" + e.getClass().getSimpleName() + "): " + e.getMessage());
         }
     }
 
@@ -60,6 +61,7 @@ public class Presenter implements Runnable {
                 Loan loan = loanQueue.take();
                 print(loan);
             } catch (InterruptedException e) {
+                log.info("Interrupted. Aborting presentation.");
                 Thread.currentThread().interrupt();
             }
         }
