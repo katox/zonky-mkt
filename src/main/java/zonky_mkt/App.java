@@ -16,6 +16,7 @@ public class App {
 
     public static final Integer PAGE_SIZE = 25;
     public static final double MAX_REQUESTS_PER_SECOND = 1.0;
+    public static final int THREAD_POOL_SIZE = 3;
 
     private String baseUrl;
     private OffsetDateTime showSince;
@@ -33,7 +34,7 @@ public class App {
     }
 
     public void tailLoans() {
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(4);
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(THREAD_POOL_SIZE);
         try {
             RateLimiter rateLimiter = RateLimiter.create(MAX_REQUESTS_PER_SECOND);
             Processor processor = new Processor(baseUrl, requestQueue, resultQueue, rateLimiter, PAGE_SIZE, showSince);

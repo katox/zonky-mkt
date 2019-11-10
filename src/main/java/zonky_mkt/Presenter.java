@@ -46,7 +46,7 @@ public class Presenter implements Runnable {
             writer.println("-".repeat(loan.getName().length()));
             writer.println(loan.getDatePublished().format(formatter));
             printWrapped(loan.getStory());
-            writer.println("=".repeat(80));
+            writer.println("=".repeat(MAX_WIDTH));
             writer.flush();
         } catch (Exception e) {
             System.err.println("Error while printing a loan (" + e.getClass().getSimpleName() + "): " + e.getMessage());
