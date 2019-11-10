@@ -7,6 +7,12 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
+/**
+ * Schedules a new marketplace refresh by the `Processor`.
+ *
+ * The scheduling interval is configured by the `ScheduledExecutorService`.
+ * It doesn't schedule a new refresh if the processor hasn't finished yet.
+ */
 public class Scheduler implements Runnable {
     private final static Logger log = Logger.getLogger(Scheduler.class.getName());
 
@@ -26,7 +32,7 @@ public class Scheduler implements Runnable {
                 log.fine("Scheduling a refresh for records published later than " + lastDate);
                 requestQueue.offer(pageRequest, 5, TimeUnit.SECONDS);
             } else {
-                log.fine("Processing doesn't seem to be able to keep up. Skipping the scheduled refresh.");
+                log.fine("The processing doesn't keep up with the scheduling interval. Skipping the refresh.");
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();

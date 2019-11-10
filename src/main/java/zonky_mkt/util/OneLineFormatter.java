@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.logging.LogRecord;
 import java.util.logging.SimpleFormatter;
 
+/**
+ * Formats a log record from the java.util.logging to a SINGLE line (as opposed to the default two).
+ */
 public class OneLineFormatter extends SimpleFormatter {
     private static final String format = "%1$tFT%1$tT %4$s %2$s %5$s%6$s%n";
     private final Date dat = new Date();

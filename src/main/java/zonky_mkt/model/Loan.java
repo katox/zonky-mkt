@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
+/**
+ *  Core fields of a loan published on the Zonky marketplace.
+ */
 public class Loan {
 
     private int id;
@@ -25,6 +28,12 @@ public class Loan {
         this.datePublished = datePublished;
     }
 
+    /**
+     * Factory method to create a Loan from the parsed generic map.
+     *
+     * @param record the record Map as parsed by the Jackson parser
+     * @return a structured Loan
+     */
     public static Loan fromMap(Map<String, Object> record) {
         try {
             return new Loan((int) record.get("id"),
@@ -37,6 +46,10 @@ public class Loan {
         }
     }
 
+    /**
+     * Get the list of core field names.
+     * @return a comma separated list as a string
+     */
     public static String getFields() {
         return Arrays.stream(Loan.class.getDeclaredFields())
                 .filter(field -> Modifier.isPrivate(field.getModifiers()))

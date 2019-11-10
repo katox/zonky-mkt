@@ -11,6 +11,10 @@ import java.util.StringTokenizer;
 import java.util.concurrent.BlockingQueue;
 import java.util.logging.Logger;
 
+/**
+ * Presents Loans incoming from the `loanQueue` to the output stream `out`
+ * in a human readable form.
+ */
 public class Presenter implements Runnable {
     private final static Logger log = Logger.getLogger(Presenter.class.getName());
     private static final int MAX_WIDTH = 80;

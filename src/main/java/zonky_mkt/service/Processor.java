@@ -19,6 +19,10 @@ import java.util.concurrent.BlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Fetches requested pages coming from the `requestQueue` at the maximal rate given by `rateLimiter`
+ * and sends parsed Loans to the `resultQueue` to be presented to the user.
+ */
 public class Processor implements Runnable {
     private final static Logger log = Logger.getLogger(Processor.class.getName());
     private static final int CONNECT_TIMEOUT = 2000;
@@ -33,6 +37,14 @@ public class Processor implements Runnable {
     private ObjectMapper mapper;
     private volatile OffsetDateTime lastDateShown;
 
+    /**
+     * @param baseUrl the marketplace URL without the query or fragment parts
+     * @param requestQueue pages to be fetched and processed
+     * @param resultQueue loans to be displayed
+     * @param rateLimiter token service supplying tokens at the defined rate
+     * @param pageSize fixed page size (number of items per request)
+     * @param lastDateShown only newer items will be fetched
+     */
     public Processor(String baseUrl, BlockingQueue<PageRequest> requestQueue, BlockingQueue<Loan> resultQueue, RateLimiter rateLimiter, Integer pageSize, OffsetDateTime lastDateShown) {
         this.baseUrl = baseUrl;
         this.requestQueue = requestQueue;

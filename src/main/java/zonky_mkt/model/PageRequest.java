@@ -2,6 +2,10 @@ package zonky_mkt.model;
 
 import java.time.OffsetDateTime;
 
+/**
+ * A single request for a marketplace page given its number `pageNo` (zero based)
+ * starting at the timestamp `sinceTs`.
+ */
 public class PageRequest {
 
     private OffsetDateTime sinceTs;
