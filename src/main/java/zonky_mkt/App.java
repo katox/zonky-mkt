@@ -82,7 +82,7 @@ public class App {
 
             log.info("Processing started. Starting publish date: " + showSince);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.log(Level.SEVERE, e.getMessage(), e);
             executor.shutdown();
         }
     }

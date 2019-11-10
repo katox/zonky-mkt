@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Processor implements Runnable {
@@ -97,9 +98,12 @@ public class Processor implements Runnable {
             }
 
             con.disconnect();
+        } catch (IOException e) {
+            requestQueue.clear();
+            log.log(Level.SEVERE, "Error connecting to the Zonky Marketplace!", e);
         } catch (Exception e) {
-            log.severe("Cant' process the response from Zonky Marketplace!");
-            e.printStackTrace();
+            requestQueue.clear();
+            log.log(Level.SEVERE, "Cant' process the response from the Zonky Marketplace!", e);
         }
     }
 
