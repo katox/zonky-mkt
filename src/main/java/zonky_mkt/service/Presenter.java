@@ -21,7 +21,7 @@ public class Presenter implements Runnable {
 
     private BlockingQueue<Loan> loanQueue;
     private PrintWriter writer;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.YYY hh:mm:ss");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.YYY HH:mm:ss");
 
     public Presenter(BlockingQueue<Loan> loanQueue, OutputStream out) {
         this.writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(out)));
