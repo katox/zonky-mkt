@@ -100,8 +100,11 @@ public class Processor implements Runnable {
                 try (InputStream in = con.getInputStream()) {
                     parseAndSendToDisplay(in);
                 }
-                int totalItems = Integer.parseInt(con.getHeaderField("X-Total"));
-                queueRemaining(lastTs, pageNo, totalItems);
+                String totalField = con.getHeaderField("X-Total");
+                if (totalField != null) {
+                    int totalItems = Integer.parseInt(totalField);
+                    queueRemaining(lastTs, pageNo, totalItems);
+                }
             } else if (status == 429) {
                 requestQueue.clear();
                 log.warning("API rate limit exceeded. Waiting for the next run.");
