@@ -73,7 +73,7 @@ public class Processor implements Runnable {
         }
     }
 
-    private URL getUrl(OffsetDateTime lastTs) throws MalformedURLException {
+    URL getUrl(OffsetDateTime lastTs) throws MalformedURLException {
         Map<String, String> params = new HashMap<>();
         params.put("fields", Loan.getFields());
         if (lastTs != null) {
